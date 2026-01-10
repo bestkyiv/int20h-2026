@@ -1,0 +1,8 @@
+---
+import { cn } from "@/util/utils";
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div class={cn("bg-accent/10 animate-pulse rounded-md", className)} {...props}>
+</div>

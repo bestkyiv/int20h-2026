@@ -1,0 +1,70 @@
+---
+import { Image } from "astro:assets";
+import faqArrow from "@/assets/faq/uparrow.svg";
+import type React from "react";
+
+interface Props {
+  question?: string;
+  answer?: string | React.ReactNode;
+  // allowing extra classes if needed
+  class?: string;
+}
+
+const { question = "", answer = "", class: className } = Astro.props;
+---
+
+<div
+  class:list={["pixelated-corners bg-brand-gray w-full group", className]}
+  data-faq-item
+>
+  <button
+    type="button"
+    aria-expanded="false"
+    class="p-1 pixelated-corners bg-brand-gold w-full text-left cursor-pointer"
+  >
+    <div
+      class="pixelated-corners bg-brand-dark px-4 py-1 flex flex-row justify-between items-center transition-colors duration-150"
+    >
+      <p
+        class="font-pixelated text-sm md:text-md lg:text-lg text-brand-pink font-bold"
+      >
+        {question}
+      </p>
+
+      <Image
+        src={faqArrow}
+        alt="Toggle"
+        class="w-8 h-8 transform transition-transform duration-200 group-aria-expanded:rotate-180"
+      />
+    </div>
+  </button>
+
+  <div class="px-9 py-2 lg:text-[32px] hidden" data-faq-content>
+    {answer}
+  </div>
+</div>
+
+<script>
+  // This script runs once per page load, even if you have 100 FAQs.
+
+  // 1. Find all FAQ components on the page
+  const faqItems = document.querySelectorAll("[data-faq-item]");
+
+  faqItems.forEach((item) => {
+    const button = item.querySelector("button");
+    const content = item.querySelector("[data-faq-content]");
+
+    if (button && content) {
+      button.addEventListener("click", () => {
+        // 2. Toggle the logic
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+        // Toggle the attribute (CSS handles the arrow rotation automatically)
+        button.setAttribute("aria-expanded", String(!isExpanded));
+
+        // Toggle visibility
+        content.classList.toggle("hidden");
+      });
+    }
+  });
+</script>

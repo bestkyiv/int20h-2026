@@ -1,31 +1,38 @@
+---
+import { Button } from "./ui/button";
+import Image from "astro/components/Image.astro";
+import hero from "@/assets/hero.svg";
+---
+
 <div
-  className="flex flex-col md:grid md:grid-cols-2 md:grid-rows-1 gap-8 md:gap-16 py-8 md:py-15 px-6 md:px-16 items-center"
+  class="flex flex-col md:grid md:grid-cols-2 md:grid-rows-1 gap-8 md:gap-16 py-8 md:py-15 px-6 md:px-16 items-center"
 >
-  <img
-    className="w-full max-w-md md:max-w-full"
-    src="hero.svg"
+  <Image
+    class="w-full max-w-md md:max-w-full"
+    src={hero}
     alt="INT20H-2026 hero"
+    loading="eager"
+    fetchpriority="high"
   />
-  <div className="flex flex-col gap-12">
-    <div className="flex flex-col gap-6">
-      <h2
-        className="font-black text-lg leading-1.2 tracking-[-0.72px] max-w-xl"
-      >
+  <div class="flex flex-col gap-12">
+    <div class="flex flex-col gap-6">
+      <h2 class="font-black text-lg leading-1.2 tracking-[-0.72px] max-w-xl">
         Ставай частинкою найбільшого студентського IT-хакатону в Україні!
       </h2>
       <div>
-        <p className="mt-4">14-15 березня 2026, Київ</p>
-        <p className="text-accent font-bold">Гібридний формат</p>
+        <p class="mt-4">14-15 березня 2026, Київ</p>
+        <p class="text-accent font-bold">Гібридний формат</p>
       </div>
     </div>
 
-    <Button
-      variant="pixel"
-      pixelSize="lg"
-      className="font-pixelated font-bold text-lg max-w-md"
-      onClick={() => setShowForm(true)}
-    >
-      Registration
-    </Button>
+    <a href="/form">
+      <Button
+        variant="pixel"
+        pixelSize="lg"
+        className="font-pixelated font-bold text-lg max-w-md"
+      >
+        Registration
+      </Button>
+    </a>
   </div>
 </div>

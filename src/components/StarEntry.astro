@@ -1,0 +1,11 @@
+---
+import star from "@/assets/benefits/star.webp";
+import Image from "astro/components/Image.astro";
+
+const { name } = Astro.props;
+---
+
+<div class="flex gap-8 items-center">
+  <Image src={star} alt="Star bullet point" class="w-8 h-8" />
+  <p class="text-accent-secondary font-black uppercase">{name}</p>
+</div>

@@ -1,0 +1,18 @@
+---
+import Image from "astro/components/Image.astro";
+import logo from "@/assets/logo.svg";
+---
+
+<header
+  class="px-6 md:px-8 py-2 flex md:flex-col lg:flex-row justify-between gap-4 items-center bg-brand-gray sticky top-0 w-full z-50"
+>
+  <a href="/">
+    <Image
+      class="md:w-1/2 lg:w-fit cursor-pointer"
+      src={logo}
+      alt="INT20H Logo"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </a>
+</header>

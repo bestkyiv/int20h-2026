@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import Skeleton from "./Skeleton.astro";
+import { cn } from "@/util/utils";
+
+const { src, alt, class: className, loading = "lazy", ...props } = Astro.props;
+---
+
+<div
+  class={cn("image-loader-container relative overflow-hidden group", className)}
+  data-loaded="false"
+>
+  <Skeleton
+    class="absolute inset-0 w-full h-full z-0 transition-opacity duration-500 group-[[data-loaded=true]]:opacity-0 pointer-events-none"
+  />
+
+  <Image
+    src={src}
+    alt={alt}
+    loading={loading}
+    class="js-image-loader opacity-0 transition-opacity duration-500 z-10 relative w-full h-full object-cover group-[[data-loaded=true]]:opacity-100"
+    {...props}
+  />
+</div>
+
+<script>
+  function init() {
+    const images = document.querySelectorAll("img.js-image-loader");
+
+    images.forEach((img) => {
+      const setLoaded = () => {
+        const parent = img.closest(".image-loader-container");
+        if (parent) {
+          parent.setAttribute("data-loaded", "true");
+        }
+      };
+
+      if (img.complete) {
+        setLoaded();
+      } else {
+        img.addEventListener("load", setLoaded);
+        img.addEventListener("error", setLoaded);
+      }
+    });
+  }
+
+  init();
+  document.addEventListener("astro:page-load", init);
+</script>

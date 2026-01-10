@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+import logo from "@/assets/logo.svg";
+const NAV_LINKS = [
+  { href: "#about", label: "Про проєкт" },
+  { href: "#categories", label: "Категорії" },
+  { href: "#how-to", label: "Умови участі" },
+  { href: "#about-us", label: "Про нас" },
+  { href: "#faq", label: "FAQ" },
+];
+---
+
+<header
+  class="px-6 md:px-8 py-2 flex md:flex-col lg:flex-row justify-between gap-4 items-center bg-brand-gray sticky top-0 w-full z-50"
+>
+  <Image
+    src={logo}
+    alt="INT20H Logo"
+    class="md:w-1/2 lg:w-fit"
+    loading="eager"
+    fetchpriority="high"
+  />
+
+  <ul class="hidden md:flex flex-row gap-8">
+    {
+      NAV_LINKS.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="font-pixelated capitalize text-sm hover:text-accent transition-colors"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <a href="/form" class="md:hidden p-2 text-brand-light">Меню</a>
+</header>

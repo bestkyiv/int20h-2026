@@ -1,0 +1,19 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import "../styles/index.css";
+
+import HeaderOther from "@/components/HeaderOther.astro";
+import { ParticipationForm } from "@/components/form/ParticipationForm";
+---
+
+<Layout>
+  <HeaderOther />
+  <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <ParticipationForm />
+    <div class="mt-6 text-right">
+      <button class="text-sm text-accent hover:underline">
+        <a href="/">Повернутися на головну</a>
+      </button>
+    </div>
+  </main>
+</Layout>
