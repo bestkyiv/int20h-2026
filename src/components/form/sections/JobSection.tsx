@@ -88,10 +88,7 @@ export function Work() {
               <FormItem>
                 <FormLabel>CV</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Посилання на CV або ім'я файлу"
-                    {...field}
-                  />
+                  <Input placeholder="Посилання на CV" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -131,7 +128,16 @@ export function Work() {
                       onBlur={() => field.onBlur()}
                     />
                     <label>
-                      Надаю інформовану згоду на обробку та передачу моїх даних
+                      Я погоджуюсь на обробку та передачу мого CV
+                      компаніям-партнерам для пошуку роботи згідно з умовами{" "}
+                      <a
+                        href="https://drive.google.com/file/d/15C9IuDwTQCrgWCaMgOrpIKbTujgVIM5x/view?usp=sharing"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Політики конфіденційності
+                      </a>
+                      .
                     </label>
                   </div>
                 </FormControl>

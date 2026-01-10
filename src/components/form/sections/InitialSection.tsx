@@ -13,13 +13,6 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Combobox } from "../../ui/combobox";
 
-const categoriesStub = [
-  { value: "web", label: "Web Development" },
-  { value: "ai", label: "Artificial Intelligence" },
-  { value: "data-science", label: "Data Science" },
-  { value: "ui-ux", label: "UI/UX Design" },
-];
-
 export interface Category {
   id: number;
   name: string;

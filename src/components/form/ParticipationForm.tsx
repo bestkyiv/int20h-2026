@@ -73,7 +73,6 @@ const formSchema = z.object({
   otherSource: z.string().optional(),
   comment: z.string().optional(),
   personalDataConsent: z.boolean(),
-  photoConsent: z.boolean(),
 });
 
 // Cross-field validation
@@ -178,13 +177,6 @@ const formSchemaWithRefine = formSchema.superRefine((data, ctx) => {
       message: "Потрібно надати згоду на обробку персональних даних.",
     });
   }
-  if (!data.photoConsent) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
-      path: ["photoConsent"],
-      message: "Потрібно надати згоду на фото- та відеозйомку.",
-    });
-  }
 });
 
 export function ParticipationForm() {
@@ -199,7 +191,9 @@ export function ParticipationForm() {
         if (!response.ok) throw new Error("Failed to fetch categories");
         const data = await response.json();
         setCategories(
-          (data.categories || []).sort((a: Category, b: Category) => a.id - b.id)
+          (data.categories || []).sort(
+            (a: Category, b: Category) => a.id - b.id
+          )
         );
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -247,7 +241,6 @@ export function ParticipationForm() {
       otherSource: "",
       comment: "",
       personalDataConsent: false,
-      photoConsent: false,
     },
     mode: "onTouched",
   });
@@ -298,7 +291,6 @@ export function ParticipationForm() {
         "source",
         "otherSource",
         "personalDataConsent",
-        "photoConsent",
       ]);
       if (!ok) return;
       // Final submit
@@ -327,7 +319,7 @@ export function ParticipationForm() {
               <span className="text-accent">Дата проведення:</span> 14-15
               березня
               <br />
-              <strong>Формат:</strong> гібрид
+              <span className="text-accent">Формат:</span> гібрид
             </p>
           </div>
         </div>
@@ -357,7 +349,7 @@ export function ParticipationForm() {
               )}
               <div className="flex-1"></div>
               <Button
-                className="px-8"
+                className="px-8 font-pixelated"
                 type="button"
                 onClick={handleNext}
                 variant="pixel"

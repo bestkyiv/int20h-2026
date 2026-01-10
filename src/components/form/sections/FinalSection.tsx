@@ -96,34 +96,14 @@ export function FinalSection() {
                   }}
                 />
                 <label>
-                  Відповідно до Закону України «Про захист персональних даних",
-                  надаю добровільну та інформовану згоду на обробку моїх
-                  персональних даних
-                </label>
-              </div>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={control}
-        name="photoConsent"
-        render={({ field }) => (
-          <FormItem>
-            <FormControl>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={(v) => {
-                    field.onChange(!!v);
-                    void trigger(field.name);
-                  }}
-                />
-                <label>
-                  Надаю згоду на фото- та відеозйомку під час проведення
-                  хакатону
+                  Я надаю згоду на обробку моїх персональних даних відповідно до{" "}
+                  <a
+                    href="https://zakon.rada.gov.ua/laws/show/2297-17"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Закону України «Про захист персональних даних»
+                  </a>
                 </label>
               </div>
             </FormControl>
