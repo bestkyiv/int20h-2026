@@ -141,4 +141,20 @@ const NAV_LINKS = [
       });
     }
   });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+
+    // Check if click is outside the menu and button
+    if (
+      isMenuOpen &&
+      mobileMenu &&
+      mobileMenuButton &&
+      !mobileMenu.contains(target) &&
+      !mobileMenuButton.contains(target)
+    ) {
+      toggleMenu();
+    }
+  });
 </script>

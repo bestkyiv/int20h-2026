@@ -1,7 +1,6 @@
-import React from "react";
 type FaqEntry = {
   question: string;
-  answer: string | React.ReactNode;
+  answer: string;
 };
 
 export const FAQ_ENTRIES: FaqEntry[] = [
@@ -17,7 +16,7 @@ export const FAQ_ENTRIES: FaqEntry[] = [
   {
     question: "Якою має бути команда?",
     answer:
-      "Команда складається з 2–4 учасників. Не обов’язково всі мають бути розробниками — потрібні також дизайнери, менеджери, презентатори. Але рекомендуємо, щоб у команді був хоча б один розробник.",
+      "Команда складається з 2–4 учасників. Не обов'язково всі мають бути розробниками — потрібні також дизайнери, менеджери, презентатори. Але рекомендуємо, щоб у команді був хоча б один розробник.",
   },
   {
     question: "Що робити, якщо немає команди?",
@@ -52,11 +51,7 @@ export const FAQ_ENTRIES: FaqEntry[] = [
   },
   {
     question: "Залишились питання?",
-    answer: (
-      <p>
-        Напиши нам:{" "}
-        <span className="text-accent">@INT20H_2026_Feedback_Bot</span>
-      </p>
-    ),
+    answer:
+      'Напиши нам: <a href="https://t.me/INT20H_2026_Feedback_Bot" target="_blank" rel="noopener noreferrer" class="text-accent">@INT20H_2026_Feedback_Bot</a>',
   },
 ];

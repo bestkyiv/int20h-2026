@@ -1,11 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import faqArrow from "@/assets/faq/uparrow.svg";
-import type React from "react";
 
 interface Props {
   question?: string;
-  answer?: string | React.ReactNode;
+  answer?: string;
   // allowing extra classes if needed
   class?: string;
 }
@@ -34,14 +33,16 @@ const { question = "", answer = "", class: className } = Astro.props;
       <Image
         src={faqArrow}
         alt="Toggle"
-        class="w-8 h-8 transform transition-transform duration-200 group-aria-expanded:rotate-180"
+        class="w-8 h-8 transform transition-transform duration-200 rotate-180 group-aria-expanded:rotate-0"
       />
     </div>
   </button>
 
-  <div class="px-9 py-2 lg:text-[32px] hidden" data-faq-content>
-    {answer}
-  </div>
+  <div
+    class="px-9 py-2 lg:text-[32px] hidden"
+    data-faq-content
+    set:html={answer}
+  />
 </div>
 
 <script>
@@ -57,10 +58,10 @@ const { question = "", answer = "", class: className } = Astro.props;
     if (button && content) {
       button.addEventListener("click", () => {
         // 2. Toggle the logic
-        const isExpanded = button.getAttribute("aria-expanded") === "true";
+        const isExpanded = item.getAttribute("aria-expanded") === "true";
 
-        // Toggle the attribute (CSS handles the arrow rotation automatically)
-        button.setAttribute("aria-expanded", String(!isExpanded));
+        // Toggle the attribute on the parent div (CSS handles the arrow rotation automatically)
+        item.setAttribute("aria-expanded", String(!isExpanded));
 
         // Toggle visibility
         content.classList.toggle("hidden");
