@@ -38,6 +38,7 @@
 
   --color-brand-dark: #262626; /* Was brand-dark */
   --color-brand-gray: #313131; /* Was secondary-bg */
+  --color-brand-gray-light: #969696;
   --color-brand-light: #efefef; /* Was text */
   --color-brand-cyan: #36ebff; /* Was accent */
   --color-brand-pink: #f6417b; /* Was accent-secondary */
@@ -75,7 +76,7 @@
   --destructive-foreground: var(--color-brand-light);
 
   --border: var(--color-brand-gray);
-  --input: var(--color-brand-gray);
+  --input: var(--color-brand-gray-light);
   --ring: var(--color-brand-cyan);
 
   /* Charts */

@@ -35,13 +35,9 @@ export function EndScreen({ type, message, onRetry }: EndScreenProps) {
               "Дякуємо за реєстрацію! Перевіряй пошту/Telegram для отримання подальших інструкцій."}
           </p>
         </div>
-        <Button
-          variant="pixel-outline"
-          onClick={() => window.location.reload()}
-          className="mt-4"
-        >
+        <a href="/" className="mt-4 cursor-pointer">
           На головну
-        </Button>
+        </a>
       </div>
     );
   }

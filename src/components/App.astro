@@ -8,11 +8,10 @@ import StarEntry from "./StarEntry.astro";
 import PentaminoIcon from "./PentaminoIcon.astro";
 import FaqEntry from "./FaqEntry.astro";
 
-import logo from "@/assets/logo.svg";
 import webCat from "@/assets/categories/web.svg";
 import aiCat from "@/assets/categories/ai.svg";
 import dsCat from "@/assets/categories/ds.svg";
-import uiCat from "@/assets/categories/ui.svg";
+import devopsCat from "@/assets/categories/devops.svg";
 import heart1 from "@/assets/how-participate/heart1.svg";
 import heart2 from "@/assets/how-participate/heart2.svg";
 import heart3 from "@/assets/how-participate/heart3.svg";
@@ -93,7 +92,7 @@ import Header from "./Header.astro";
       <Category imgSrc={webCat} withOverlay name="Web" />
       <Category imgSrc={aiCat} withOverlay name="AI" />
       <Category imgSrc={dsCat} withOverlay name="Data Science" />
-      <Category imgSrc={uiCat} withOverlay name="UI/UX Design" />
+      <Category imgSrc={devopsCat} withOverlay name="DevOps" />
     </div>
   </section>
 
@@ -103,7 +102,7 @@ import Header from "./Header.astro";
       <div class="flex justify-between items-center">
         <div class="flex gap-6 items-center">
           <div class="relative w-8 h-8">
-            <Image src={heart1} alt="Heart 1/4" />
+            <Image class="w-full h-full" src={heart1} alt="Heart 1/4" />
             <div class="absolute inset-0 flex justify-center -z-10">
               <div
                 class="w-full aspect-square rounded-full bg-brand-pink blur-2xl opacity-30"
@@ -121,7 +120,7 @@ import Header from "./Header.astro";
 
       <div class="flex gap-6 items-center">
         <div class="relative w-8 h-8">
-          <Image src={heart2} alt="Heart 2/4" />
+          <Image class="w-full h-full" src={heart2} alt="Heart 2/4" />
           <div class="absolute inset-0 flex justify-center -z-10">
             <div
               class="w-full aspect-square rounded-full bg-brand-pink blur-2xl opacity-30"
@@ -139,7 +138,7 @@ import Header from "./Header.astro";
       <div class="flex justify-between">
         <div class="flex gap-6 items-center">
           <div class="relative w-8 h-8">
-            <Image src={heart3} alt="Heart 3/4" />
+            <Image class="w-full h-full" src={heart3} alt="Heart 3/4" />
             <div class="absolute inset-0 flex justify-center -z-10">
               <div
                 class="w-full aspect-square rounded-full bg-brand-pink blur-2xl opacity-30"
@@ -157,7 +156,7 @@ import Header from "./Header.astro";
 
       <div class="flex gap-6 items-center">
         <div class="relative w-8 h-8">
-          <Image src={heart4} alt="Heart 4/4" />
+          <Image class="w-full h-full" src={heart4} alt="Heart 4/4" />
           <div class="absolute inset-0 flex justify-center -z-10">
             <div
               class="w-full aspect-square rounded-full bg-brand-pink blur-2xl opacity-30"

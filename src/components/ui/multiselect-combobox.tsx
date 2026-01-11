@@ -101,7 +101,7 @@ export function MultiSelectCombobox({
           role="combobox"
           aria-expanded={open}
           className={cn(
-            "w-full justify-between h-auto min-h-10 px-3 py-2 hover:bg-background",
+            "w-full justify-between h-auto min-h-10 px-3 py-2 border-input hover:bg-accent hover:border-accent overflow-hidden",
             className
           )}
         >
@@ -145,9 +145,7 @@ export function MultiSelectCombobox({
                 );
               })
             ) : (
-              <span className="text-muted-foreground font-normal">
-                {placeholder}
-              </span>
+              <span className=" font-normal">{placeholder}</span>
             )}
           </div>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
