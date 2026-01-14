@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
 
 # Install dependencies
-RUN npm ci || npm install
+RUN npm install
 
 # Copy source code
 COPY . .
@@ -23,9 +23,9 @@ WORKDIR /app
 # Copy built assets from builder
 COPY --from=builder /app/dist ./dist
 
-# Install only production dependencies (optional - Astro static sites may not need this)
+# Install production dependencies
 COPY package.json ./
-RUN npm ci --omit=dev || npm install --omit=dev
+RUN npm install --omit=dev
 
 # Expose port
 EXPOSE 3000
