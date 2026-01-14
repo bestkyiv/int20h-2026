@@ -14,13 +14,15 @@ export default defineConfig({
         $fonts: resolve("./src/assets/fonts"),
       },
     },
-    preview: {
-      allowedHosts: ['int20h.best-kyiv.org', 'localhost']
-    },
   },
   server: {
     host: "0.0.0.0",
     port: 3000,
+  },
+  preview: {
+    host: "0.0.0.0",
+    port: 3000,
+    allowedHosts: ['int20h.best-kyiv.org', 'localhost'],
   },
   integrations: [react()],
 });
