@@ -13,8 +13,6 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.text();
 
-    console.log("Proxy received body:", body);
-
     const response = await fetch(`${cleanBaseUrl}/form/`, {
       method: "POST",
       headers: {
@@ -22,8 +20,6 @@ export const POST: APIRoute = async ({ request }) => {
       },
       body,
     });
-
-    console.log("Response from backend: ", response);
 
     const respText = await response.text();
 
