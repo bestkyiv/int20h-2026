@@ -385,7 +385,7 @@ export function ParticipationForm() {
             personal_data_consent: true,
           };
 
-          const response = await fetch(`${BACKEND_URL}/form/`, {
+          const response = await fetch(`/api/form`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
