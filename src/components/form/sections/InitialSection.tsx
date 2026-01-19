@@ -129,7 +129,7 @@ export function InitialSection({
         name="is_student"
         render={({ field }) => (
           <FormItem className="space-y-2">
-            <FormLabel>Чи ви студент? *</FormLabel>
+            <FormLabel>Ти студент? *</FormLabel>
             <FormControl>
               <RadioGroup
                 value={field.value}
