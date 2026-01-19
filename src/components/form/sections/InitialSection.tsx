@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Combobox } from "../../ui/combobox";
@@ -36,7 +37,9 @@ export function InitialSection({
   universities,
   skills,
 }: InitialSectionProps) {
-  const { control, trigger } = useFormContext();
+  const { control, trigger, watch } = useFormContext();
+
+  const isStudent = watch("is_student");
 
   const categoryItems = categories.map((c) => ({
     value: c.name,
@@ -123,49 +126,111 @@ export function InitialSection({
 
       <FormField
         control={control}
-        name="studyYear"
+        name="is_student"
         render={({ field }) => (
-          <FormItem className="flex flex-col">
-            <FormLabel>Курс *</FormLabel>
+          <FormItem className="space-y-2">
+            <FormLabel>Чи ви студент? *</FormLabel>
             <FormControl>
-              <Combobox
-                items={studyYearItems}
+              <RadioGroup
                 value={field.value}
-                onChange={(value) => {
-                  field.onChange(value);
-                  void trigger(field.name);
+                onValueChange={(v) => {
+                  field.onChange(v);
+                  if (v === "yes") {
+                    void trigger(["university", "studyYear"]);
+                  } else {
+                    void trigger(["is_over16"]);
+                  }
                 }}
-                placeholder="Обери курс..."
-                emptyText="Курс не знайдено."
-              />
+                onBlur={field.onBlur}
+                className="flex flex-col space-y-1"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="yes" id="isStudentYes" />
+                  <Label htmlFor="isStudentYes">Так</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="no" id="isStudentNo" />
+                  <Label htmlFor="isStudentNo">Ні</Label>
+                </div>
+              </RadioGroup>
             </FormControl>
             <FormMessage />
           </FormItem>
         )}
       />
 
-      <FormField
-        control={control}
-        name="university"
-        render={({ field }) => (
-          <FormItem className="flex flex-col">
-            <FormLabel>Твій навчальний заклад *</FormLabel>
-            <FormControl>
-              <Combobox
-                items={universityItems}
-                value={field.value}
-                onChange={(value) => {
-                  field.onChange(value);
-                  void trigger(field.name);
-                }}
-                placeholder="Оберіть університет..."
-                emptyText="Університет не знайдено."
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      {isStudent === "yes" ? (
+        <>
+          <FormField
+            control={control}
+            name="studyYear"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Курс *</FormLabel>
+                <FormControl>
+                  <Combobox
+                    items={studyYearItems}
+                    value={field.value}
+                    onChange={(value) => {
+                      field.onChange(value);
+                      void trigger(field.name);
+                    }}
+                    placeholder="Обери курс..."
+                    emptyText="Курс не знайдено."
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name="university"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Твій навчальний заклад *</FormLabel>
+                <FormControl>
+                  <Combobox
+                    items={universityItems}
+                    value={field.value}
+                    onChange={(value) => {
+                      field.onChange(value);
+                      void trigger(field.name);
+                    }}
+                    placeholder="Оберіть університет..."
+                    emptyText="Університет не знайдено."
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </>
+      ) : (
+        <FormField
+          control={control}
+          name="is_over16"
+          render={({ field }) => (
+            <FormItem className="flex items-center space-x-3">
+              <FormControl>
+                <Checkbox
+                  id="isOver16"
+                  checked={!!field.value}
+                  onCheckedChange={(v) => {
+                    field.onChange(!!v);
+                    void trigger(field.name);
+                  }}
+                />
+              </FormControl>
+              <Label htmlFor="isOver16" className="mb-0">
+                Мені більше 16 років *
+              </Label>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      )}
 
       <FormField
         control={control}

@@ -22,9 +22,7 @@ export function Work() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-lg font-pixelated font-semibold">
-        В пошуку роботи?😉
-      </h2>
+      <h2 className="text-lg font-pixelated ">В пошуку роботи?😉</h2>
       <p>
         INT20H співпрацює з різними компаніями, що зацікавлені в пошуку
         початківців спеціалістів. Якщо розглядаєш пошук роботи, то залиш своє
@@ -118,8 +116,9 @@ export function Work() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-start gap-2">
                     <Checkbox
+                      id="work-terms"
                       checked={field.value}
                       onCheckedChange={(v) => {
                         field.onChange(!!v);
@@ -127,14 +126,18 @@ export function Work() {
                       }}
                       onBlur={() => field.onBlur()}
                     />
-                    <label>
+                    <label
+                      htmlFor="work-terms"
+                      className="text-sm leading-relaxed"
+                    >
                       Я погоджуюсь на обробку та передачу мого CV
                       компаніям-партнерам для пошуку роботи згідно з умовами{" "}
                       <a
                         className="text-accent underline"
-                        href="https://drive.google.com/file/d/15C9IuDwTQCrgWCaMgOrpIKbTujgVIM5x/view?usp=sharing"
+                        href="..."
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         Політики конфіденційності
                       </a>
@@ -146,13 +149,6 @@ export function Work() {
               </FormItem>
             )}
           />
-
-          {cv || linkedin ? (
-            <p className="text-sm text-muted-foreground">
-              Якщо ви надали CV або LinkedIn, треба надати згоду для передачі
-              даних.
-            </p>
-          ) : null}
         </>
       )}
     </div>

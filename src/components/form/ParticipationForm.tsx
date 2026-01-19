@@ -67,13 +67,17 @@ const formSchema = z.object({
         message: "Номер телефону має містити не більше 100 символів.",
       }),
   ),
-  university: z.string().min(1, {
-    message: "Будь ласка, виберіть університет.",
-  }),
+  university: z
+    .string()
+    .min(1, {
+      message: "Будь ласка, виберіть університет.",
+    })
+    .optional(),
 
-  studyYear: z.string().min(1, {
-    message: "Будь ласка, виберіть курс.",
-  }),
+  studyYear: z
+    .string()
+    .min(1, { message: "Будь ласка, виберіть курс." })
+    .optional(),
 
   category: z.string().min(1, {
     message: "Будь ласка, виберіть категорію.",
@@ -104,9 +108,7 @@ const formSchema = z.object({
     })
     .optional(),
   workConsent: z.boolean().optional(),
-  source: z
-    .string()
-    .min(1, { message: "Будь ласка, виберіть джерело." }),
+  source: z.string().min(1, { message: "Будь ласка, виберіть джерело." }),
   otherSource: z
     .string()
     .max(100, { message: "Інше джерело має містити не більше 100 символів." })
@@ -117,6 +119,8 @@ const formSchema = z.object({
     .optional(),
   personalDataConsent: z.boolean(),
   skills: z.array(z.string()).default([]),
+  is_student: z.enum(["yes", "no"]).default("yes"),
+  is_over16: z.boolean().optional(),
 });
 
 // Cross-field validation
@@ -135,21 +139,6 @@ const formSchemaWithRefine = formSchema.superRefine((data, ctx) => {
         code: z.ZodIssueCode.custom,
         path: ["teamLeader"],
         message: "Будь ласка, вкажіть, чи є Ви тім-лідом.",
-      });
-    }
-  }
-
-  // If CV or LinkedIn provided, require workConsent
-  if (
-    (data.cv && data.cv.trim() !== "") ||
-    (data.linkedin && data.linkedin.trim() !== "")
-  ) {
-    if (!data.workConsent) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["workConsent"],
-        message:
-          "Потрібно надати згоду на обробку даних для передачі CV/LinkedIn.",
       });
     }
   }
@@ -179,6 +168,15 @@ const formSchemaWithRefine = formSchema.superRefine((data, ctx) => {
           message: "Будь ласка, вкажіть коректне посилання на CV.",
         });
       }
+    }
+
+    if (!data.workConsent) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["workConsent"],
+        message:
+          "Потрібно надати згоду на обробку даних для передачі CV/LinkedIn.",
+      });
     }
   }
 
@@ -220,6 +218,41 @@ const formSchemaWithRefine = formSchema.superRefine((data, ctx) => {
       path: ["personalDataConsent"],
       message: "Потрібно надати згоду на обробку персональних даних.",
     });
+  }
+
+  // Student vs non-student logic: require studyYear/university if student
+  if (data.is_student === "yes") {
+    if (
+      !data.university ||
+      (typeof data.university === "string" &&
+        data.university.trim().length === 0)
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["university"],
+        message: "Будь ласка, виберіть університет.",
+      });
+    }
+
+    if (
+      !data.studyYear ||
+      (typeof data.studyYear === "string" && data.studyYear.trim().length === 0)
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["studyYear"],
+        message: "Будь ласка, виберіть курс.",
+      });
+    }
+  } else {
+    // If not a student, require confirmation that user is over 16
+    if (data.is_over16 !== true) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["is_over16"],
+        message: "Потрібно підтвердити, що вам більше 16 років.",
+      });
+    }
   }
 });
 
@@ -305,6 +338,8 @@ export function ParticipationForm() {
       comment: "",
       personalDataConsent: false,
       skills: [],
+      is_student: "yes",
+      is_over16: false,
     },
     mode: "onTouched",
   });
@@ -334,17 +369,27 @@ export function ParticipationForm() {
 
   async function handleNext() {
     if (step === 1) {
-      const ok = await trigger([
+      // Validate base fields and conditionally validate student/non-student fields
+      const baseFields = [
         "firstName",
         "email",
         "telegram",
         "phone",
-        "university",
-        "studyYear",
         "category",
         "format",
         "hasTeam",
-      ]);
+      ];
+
+      const isStudent = getValues("is_student");
+
+      let fieldsToValidate = [...baseFields];
+      if (isStudent === "yes") {
+        fieldsToValidate.push("university", "studyYear");
+      } else {
+        fieldsToValidate.push("is_over16");
+      }
+
+      const ok = await trigger(fieldsToValidate as any);
       if (!ok) return;
       setStep(2);
       return;
@@ -397,7 +442,7 @@ export function ParticipationForm() {
             phone: values.phone,
             university_id: universityId,
             category_id: categoryId,
-            study_year: parseInt(values.studyYear),
+            study_year: values.studyYear ? parseInt(values.studyYear) : null,
             skills: values.skills,
             format: values.format,
             has_team: values.hasTeam === "yes",
@@ -408,6 +453,8 @@ export function ParticipationForm() {
             cv: values.cv || "",
             linkedin: values.linkedin || "",
             work_consent: values.workConsent || false,
+            is_student: values.is_student === "yes",
+            is_over16: values.is_over16 === true,
             source: values.source,
             otherSource: values.otherSource || null,
             comment: values.comment || null,

@@ -95,7 +95,7 @@ export function FinalSection() {
                     void trigger(field.name);
                   }}
                 />
-                <label>
+                <label className="text-sm leading-relaxed">
                   Я надаю згоду на обробку моїх персональних даних відповідно до{" "}
                   <a
                     className="text-accent underline"
