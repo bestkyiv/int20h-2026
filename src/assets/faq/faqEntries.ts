@@ -46,10 +46,6 @@ export const FAQ_ENTRIES: FaqEntry[] = [
     answer: "Так, ми забезпечимо перекуси та напої.",
   },
   {
-    question: "Чи можна брати участь онлайн?",
-    answer: "Так, хакатон проходить у гібридному форматі — офлайн або онлайн.",
-  },
-  {
     question: "Залишились питання?",
     answer:
       'Напиши нам у Telegram 👉 <a href="https://t.me/INT20H_2026_Feedback_Bot" target="_blank" rel="noopener noreferrer" class="text-accent">@INT20H_2026_Feedback_Bot</a>',
