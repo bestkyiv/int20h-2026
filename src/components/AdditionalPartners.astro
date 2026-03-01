@@ -1,7 +1,6 @@
 ---
-import Heading from "./ui/heading";
 import arcanum from "@/assets/partners/additional/arcanum.png";
-import carlsberg from "@/assets/partners/additional/carlsberg.png";
+// import carlsberg from "@/assets/partners/additional/carlsberg.png";
 import flampic from "@/assets/partners/additional/flampic.png";
 import greenForest from "@/assets/partners/additional/greenforest.png";
 import kyivstar from "@/assets/partners/additional/kyivstar.png";
@@ -16,11 +15,11 @@ const additionalPartners = [
     logo: morshynska.src,
     link: "https://www.instagram.com/morshynska.ua?igsh=Zm4wMWtsdWV1N2pu",
   },
-  {
-    name: "Carlsberg",
-    logo: carlsberg.src,
-    link: "https://carlsbergukraine.com/",
-  },
+  // {
+  //   name: "Carlsberg",
+  //   logo: carlsberg.src,
+  //   link: "https://carlsbergukraine.com/",
+  // },
   {
     name: "ARCANUM",
     logo: arcanum.src,
@@ -54,7 +53,4 @@ const additionalPartners = [
 ];
 ---
 
-<div>
-  <Heading level={2} className="mb-8 mt-16">Наші додаткові партнери</Heading>
-  <LogoMarquee client:load logos={additionalPartners} />
-</div>
+<LogoMarquee client:load logos={additionalPartners} />
