@@ -15,6 +15,7 @@ type Partner = {
   name: string;
   logo: string;
   link: string;
+  size: string;
 };
 
 type MarqueeItemProps = {
@@ -57,25 +58,25 @@ const MarqueeItem: React.FC<MarqueeItemProps> = ({ logos, speed }) => {
   }, [loopStart]);
 
   return (
-    <motion.div 
-      className="flex min-w-full shrink-0 items-center justify-around px-4" 
+    <motion.div
+      className="flex min-w-full shrink-0 items-center justify-around px-4"
       ref={itemRef}
     >
       {logos.map((partner, i) => (
-        <a 
-          key={i} 
-          href={partner.link} 
-          target="_blank" 
+        <a
+          key={i}
+          href={partner.link}
+          target="_blank"
           rel="noopener noreferrer"
           className="mx-8 block" // Added 'block' for better anchor sizing
           draggable={false} // Prevent native dragging on the link itself
           onDragStart={(e) => e.preventDefault()} // The magic bullet to stop browser link-ghosting
         >
-          <img 
-            src={partner.logo} 
-            className="h-12 w-auto transition-all hover: scale-110" 
-            alt={partner.name} 
-            draggable={false} 
+          <img
+            src={partner.logo}
+            className={`w-auto transition-all hover: scale-110 ${partner.size}`}
+            alt={partner.name}
+            draggable={false}
           />
         </a>
       ))}
@@ -113,7 +114,7 @@ export const LogoMarquee: React.FC<MarqueeProps> = ({
   const skewX = useTransform(
     speedSpring,
     [-wWidth * 0.05, 0, wWidth * 0.05],
-    [1, 0, 1]
+    [1, 0, 1],
   );
 
   // Replaced inline onWheel with a non-passive native event listener
@@ -149,7 +150,10 @@ export const LogoMarquee: React.FC<MarqueeProps> = ({
     speedSpring.set(0);
   };
 
-  const handleOnDrag = (e: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+  const handleOnDrag = (
+    e: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo,
+  ) => {
     speedSpring.set(dragFactor * -info.delta.x);
   };
 
