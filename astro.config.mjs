@@ -6,6 +6,8 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 
+const assetsBaseUrl = process.env.ASSETS_BASE_URL || "/";
+
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
@@ -17,7 +19,5 @@ export default defineConfig({
   },
 
   integrations: [react()],
-  build: {
-    assetsPrefix: "https://best.kpi.ua/int20h-2026",
-  },
+  base: assetsBaseUrl,
 });

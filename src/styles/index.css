@@ -43,6 +43,17 @@
   --color-brand-cyan: #36ebff; /* Was accent */
   --color-brand-pink: #f6417b; /* Was accent-secondary */
   --color-brand-gold: #d9d9d9; /* Was accent-gold */
+
+  --animate-marquee: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 :root {

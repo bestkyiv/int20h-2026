@@ -1,0 +1,71 @@
+---
+import arcanum from "@/assets/partners/additional/arcanum.png";
+import carlsbergKvasTaras from "@/assets/partners/additional/carlsberg-kvas-taras.png";
+import carlsbergRozmay from "@/assets/partners/additional/carlsberg-rozmay.png";
+import flampic from "@/assets/partners/additional/flampic.png";
+import greenForest from "@/assets/partners/additional/greenforest.png";
+import kyivstar from "@/assets/partners/additional/kyivstar.png";
+import morshynska from "@/assets/partners/additional/morshynska.png";
+import dmytruk from "@/assets/partners/additional/dmytruk.png";
+import hillel from "@/assets/partners/additional/hillel.png";
+import { LogoMarquee } from "./LogoMarquee.tsx";
+
+const additionalPartners = [
+  {
+    name: "Моршинська",
+    logo: morshynska.src,
+    link: "https://www.instagram.com/morshynska.ua?igsh=Zm4wMWtsdWV1N2pu",
+    size: "h-12",
+  },
+  {
+    name: "Carlsberg Kvas Taras",
+    logo: carlsbergKvasTaras.src,
+    link: "https://carlsbergukraine.com/brands/kvas-taras/kvas-taras/",
+    size: "h-24",
+  },
+  {
+    name: "Carlsberg Rozmay",
+    logo: carlsbergRozmay.src,
+    link: "https://carlsbergukraine.com/brands/rozmay/rozmay-l%D1%96soviy-djushes",
+    size: "h-24",
+  },
+  {
+    name: "ARCANUM",
+    logo: arcanum.src,
+    link: "https://www.instagram.com/arcanum.kyiv?igsh=YmhldGlpdzU0bmNy",
+    size: "h-16",
+  },
+  {
+    name: "Flampic",
+    logo: flampic.src,
+    link: "https://www.instagram.com/flampic?igsh=MTIxNDB1ZmhkZW5udQ==",
+    size: "h-12",
+  },
+  {
+    name: "Київстар ТБ",
+    logo: kyivstar.src,
+    link: "https://tv.kyivstar.ua/ua/?utm_source=google&utm_medium=cpc&utm_campaign=ks-tv_reg_google_search-brand-rlsa-inactive-users_ukraine&utm_term=%D0%BA%D0%B8%D1%97%D0%B2%D1%81%D1%82%D0%B0%D1%80%20%D1%82%D0%B1&utm_content=acid-20948714793_agid-158649041035_aaid-688153055955_ch_google_adwords%7Ctrg_kwd-298723946376%7Ccrt_688153055955%7Ckwmt_p%7Cps_%7Csrct_g%7Ctrgt_%7Csrc_%7Cdevt_c%7Cdevm_%7Clcl_9061017%7Cfdi_%7Cmrlid_5796%7Cdop_&gad_source=1&gad_campaignid=20948714793&gbraid=0AAAAADfoPFWvB28QwPB2PZgBB4yB1uKEu&gclid=Cj0KCQiAtfXMBhDzARIsAJ0jp3DREQ8a8WD-cTrZQbWaUVQywV_n4dPNJhb7hxvkmeHXFoZnN9YDHWgaAv6kEALw_wcB",
+    size: "h-12",
+  },
+  {
+    name: "Дмитрук",
+    logo: dmytruk.src,
+    link: "https://www.dmytruk-foods.com/kompaniya_dmitruk_pochala_viroblyati_spravjni_kabanosy",
+    size: "h-12",
+  },
+  {
+    name: "Green Forest",
+    logo: greenForest.src,
+    link: "https://www.greenforest.com.ua/",
+    size: "h-16",
+  },
+  {
+    name: "Hillel IT School",
+    logo: hillel.src,
+    link: "http://it2school.od.ua",
+    size: "h-12",
+  },
+];
+---
+
+<LogoMarquee client:load logos={additionalPartners} />
